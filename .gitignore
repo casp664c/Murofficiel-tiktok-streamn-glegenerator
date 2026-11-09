@@ -1,0 +1,24 @@
+# Android / Gradle
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+*.apk
+*.aab
+
+# Secrets / local configuration
+.env
+.env.*
+!.env.example
+*.keystore
+*.jks
+*.p12
+*.pem
+secrets.properties
+credentials.json
+
+# Node
+node_modules/
+coverage/
+.DS_Store

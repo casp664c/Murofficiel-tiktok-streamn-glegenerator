@@ -1,9 +1,9 @@
 {
   "name": "live-key-studio-backend",
-  "version": "0.1.0-dev",
+  "version": "0.2.0-dev",
   "private": true,
   "type": "module",
-  "description": "Safe foundation for Android backend diagnostics; no TikTok key generation yet.",
+  "description": "Backend for Live Key Studio: accounts, encrypted RTMP profiles and diagnostics. No TikTok key generation.",
   "engines": { "node": ">=20" },
   "scripts": {
     "start": "node src/server.mjs",

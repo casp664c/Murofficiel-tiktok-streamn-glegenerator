@@ -1,15 +1,19 @@
-# TikTok-integration — uprøvet
+# TikTok-integration
 
-Projektets mål er en selvudviklet uofficiel Android-generator, som kan skaffe reelle streamingoplysninger for en konto, der er autoriseret til LIVE. **Der er ingen verificeret implementering af dette mål i v0.1**.
+**Status: ingen automatisk nøgleudstedelse.** TikTok har ingen offentlig API, der udleverer streamnøgler, og TikTok afgør selv, om en konto må gå LIVE. En tilfældigt genereret nøgle bliver ikke accepteret, og en Altare-server ændrer ikke dette.
 
-TikTok kontrollerer selv, om en LIVE-session må oprettes, og udsteder/accepterer de gyldige oplysninger. En tilfældigt genereret nøgle vil ikke blive accepteret, og en Altare-server ændrer ikke dette.
+## Sådan bruger projektet TikTok i dag
+1. Brugeren henter sin egen serveradresse og streamnøgle fra TikToks officielle værktøjer (fx LIVE Studio), på en konto med adgang til LIVE. Appens fane *Guide* beskriver trinnene.
+2. Brugeren indsætter oplysningerne i appen og gemmer dem som en krypteret profil.
+3. Appen tester, at serveren svarer (RTMP-handshake), og kan streame fra telefonens kamera eller kopiere oplysningerne til en anden streamingapp.
+4. TikTok validerer nøglen, når streamen starter. Afvises den, viser appen en fejl uden at gentage nøglen.
 
-## Verificeringsplan
-1. Dokumentér tekniske adgangskrav og betingelser til TikTok LIVE.
-2. Brug en konto, som ejeren har lov til at bruge, og anvend kun brugerautoriserede sessioner.
-3. Adskil session-provider fra Android-UI og Node.js-health API.
-4. Anvend ikke uverificerede signeringstjenester eller indsamling af adgangskoder til tredjepart.
-5. Test eventuel senere nøgleudstedelse, udløbstid og RTMP/RTMPS-forbindelse uden at offentliggøre credentials.
-6. Lad systemet returnere en præcis fejl, hvis TikTok afviser en session.
+## Hvad der ikke bygges
+- Ingen omgåelse af TikToks krav til konti, og ingen opfundne eller gættede nøgler.
+- Ingen indsamling af TikTok-adgangskoder eller cookies, hverken i appen eller i backenden.
+- Ingen uverificerede signeringstjenester.
 
-Ingen kode i v0.1 må fremstille et fiktivt resultat som en fungerende TikTok-nøgle.
+## Hvis TikTok senere tilbyder en officiel vej
+Provider-grænsefladen `LiveSessionProvider` i appen og `POST /api/v1/sessions` i backenden er forberedt til det. En provider må kun returnere virkeligt udstedte oplysninger for en bruger, der har givet tilladelse, og skal have rate limits, tokenstyring og testkonto, før den aktiveres.
+
+Ingen kode må fremstille et fiktivt resultat som en fungerende TikTok-nøgle.
